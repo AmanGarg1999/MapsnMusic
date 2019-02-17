@@ -12,6 +12,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.spotify.android.appremote.api.ConnectionParams;
@@ -35,6 +36,8 @@ public class MainActivity extends AppCompatActivity {
     //public static TextView loc;
     public String[] location_data;
     public static String mood;
+    public static ImageView img;
+    public static TextView disc;
 //    public String[] high = {"spotify:playlist:37i9dQZF1DXdPec7aLTmlC"};
 //    public String[] med = {"spotify:playlist:37i9dQZF1DWSRc3WJklgBs"};
 //    public String[] low = {"spotify:playlist:37i9dQZF1DWSqmBTGDYngZ"};
@@ -57,6 +60,8 @@ public class MainActivity extends AppCompatActivity {
 
         playbt = (Button) findViewById(R.id.playbtn); // Create Play Button
        // loc = (TextView)findViewById(R.id.location);
+        img = (ImageView)findViewById(R.id.imageView2);
+        disc =(TextView)findViewById(R.id.textView);
 
         playbt.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -65,21 +70,10 @@ public class MainActivity extends AppCompatActivity {
                 background.execute();
                 //String id = background.getID();
                 connected();
-                startActivity(new Intent(MainActivity.this, Displaypage.class));
+                //startActivity(new Intent(MainActivity.this, Displaypage.class));
                 //loc.setText(id);
                  //Displaypage.disc.setText("hey " + id);
                 //onStart();
-//                try {
-//                    //StringBuffer response = new StringBuffer();
-//                    URL oracle = new URL("https://api.openweathermap.org/data/2.5/weather?lat=43.054304&lon=-77.606241&APPID=c2669574602fa7abeb8a87e07656a42b");
-//                    BufferedReader in = new BufferedReader(new InputStreamReader(oracle.openStream()));
-//                while ((inputLine = in.readLine()) != null)
-//
-//                        in.close();
-//                }
-//                catch (Exception e){}
-//                loc.setText(inputLine);
-
 
                 // Code For selecting music
                 //loc.setText(location_data[0] + "," + location_data[1]);
@@ -119,13 +113,6 @@ public class MainActivity extends AppCompatActivity {
 
 
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
             return;
         }
         locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locationListener);

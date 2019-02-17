@@ -1,5 +1,7 @@
 package com.example.mapsnmusic;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 
 import org.json.JSONArray;
@@ -93,8 +95,31 @@ public class fetchdata extends AsyncTask<Void,Void,Void> {
         idtoConditions itc = new idtoConditions();
         itc.loadDictionary(dictionary);
         String condition = itc.getWeather(Integer.parseInt(idnum),dictionary);
+        int first = Integer.parseInt(idnum);
+        int firstnum = first%10;
+        //Bitmap bmap = BitmapFactory.decodeFile("drawable/Icons/thunderstorm.png");
+//        if(firstnum == 2){
+//            Bitmap bmap = BitmapFactory.decodeFile("drawable/Icons/thunderstorm.png");
+//            thunderstorm
+//        }
+//        else if(firstnum == 3){
+//            drizzle
+//        }
+//        else if(firstnum == 5){
+//            drizzle
+//        }
+//        else if(firstnum == 6){
+//            snow
+//        }
+//        else if(firstnum == 7){
+//            atmosphere
+//        }
+//        else{
+//            clear
+//        }
 
-        Displaypage.disc.setText("It's " + condition);
+
+        MainActivity.disc.setText("It's " + condition);
 
     }
 //    public String getID()
