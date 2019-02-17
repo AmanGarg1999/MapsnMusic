@@ -1,13 +1,6 @@
 package com.example.mapsnmusic;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -20,7 +13,6 @@ import java.util.HashMap;
 public class fetchdata extends AsyncTask<Void,Void,Void> {
     String data;
     String line = "";
-    String dataParsed = "";
     String temperature;
     String music;
     String mood;
@@ -97,36 +89,11 @@ public class fetchdata extends AsyncTask<Void,Void,Void> {
         String condition = itc.getWeather(Integer.parseInt(idnum),dictionary);
         int first = Integer.parseInt(idnum);
         int firstnum = first%10;
-        //Bitmap bmap = BitmapFactory.decodeFile("drawable/Icons/thunderstorm.png");
-//        if(firstnum == 2){
-//            Bitmap bmap = BitmapFactory.decodeFile("drawable/Icons/thunderstorm.png");
-//            thunderstorm
-//        }
-//        else if(firstnum == 3){
-//            drizzle
-//        }
-//        else if(firstnum == 5){
-//            drizzle
-//        }
-//        else if(firstnum == 6){
-//            snow
-//        }
-//        else if(firstnum == 7){
-//            atmosphere
-//        }
-//        else{
-//            clear
-//        }
 
-
-        MainActivity.disc.setText("It's " + condition);
+        MainActivity.cond.setText("It's " + condition);
+        MainActivity.temp.setText(this.temperature);
 
     }
-//    public String getID()
-//    {
-//        return this.idnum;
-//    }
-
 
 }
 

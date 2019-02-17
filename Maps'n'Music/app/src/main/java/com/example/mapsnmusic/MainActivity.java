@@ -32,22 +32,16 @@ public class MainActivity extends AppCompatActivity {
     private SpotifyAppRemote mSpotifyAppRemote;
 
     public Button playbt;
-    //private GoogleMap map;
-    //public static TextView loc;
     public String[] location_data;
     public static String mood;
-    public static ImageView img;
-    public static TextView disc;
-//    public String[] high = {"spotify:playlist:37i9dQZF1DXdPec7aLTmlC"};
-//    public String[] med = {"spotify:playlist:37i9dQZF1DWSRc3WJklgBs"};
-//    public String[] low = {"spotify:playlist:37i9dQZF1DWSqmBTGDYngZ"};
+    public static TextView song;
+    public static TextView cond;
+    public static TextView temp;
 
     public String[] high ={"spotify:playlist:37i9dQZF1DWWMOmoXKqHTD","spotify:playlist:37i9dQZF1DX3rxVfibe1L0","spotify:playlist:37i9dQZF1DX4fpCWaHOned","spotify:playlist:37i9dQZF1DX6ziVCJnEm59"};
-
     public String[] med={"spotify:playlist:37i9dQZF1DXdPec7aLTmlC","spotify:playlist:37i9dQZF1DX7gIoKXt0gmx","spotify:playlist:37i9dQZF1DX0UrRvztWcAU","spotify:playlist:37i9dQZF1DWXmlLSKkfdAk","37i9dQZF1DWSRc3WJklgBs"};
-
     public String[] low={"spotify:playlist:37i9dQZF1DWSqmBTGDYngZ","spotify:playlist:37i9dQZF1DX7KNKjOK0o75","spotify:playlist:37i9dQZF1DX3YSRoSdA634"};
-
+    private static final String TAG = "MainActivity";
     //    StringBuilder str=new StringBuilder();
     //    URL url;
     //    String inputLine;
@@ -57,28 +51,33 @@ public class MainActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+  //     Log.d(TAG, "onCreate started");
+//        ImageView imageView2 = (ImageView) findViewById(R.id.imageView2);
 
+//        int imageResource = getResources().getIdentifier("drawable/atmosphere.png",null, this.getPackageName());
+//        imageView2.setImageResource(imageResource);
         playbt = (Button) findViewById(R.id.playbtn); // Create Play Button
-       // loc = (TextView)findViewById(R.id.location);
-        img = (ImageView)findViewById(R.id.imageView2);
-        disc =(TextView)findViewById(R.id.textView);
-
+//       // loc = (TextView)findViewById(R.id.location);
+//        img = (ImageView)findViewById(R.id.imageView2);
+       song =(TextView)findViewById(R.id.song);
+       temp = (TextView)findViewById(R.id.temp);
+       cond = (TextView)findViewById(R.id.condition);
+//
         playbt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 fetchdata background = new fetchdata();
                 background.execute();
+
+                //imageView2.setImageResource(imageResource);
                 //String id = background.getID();
                 connected();
                 //startActivity(new Intent(MainActivity.this, Displaypage.class));
                 //loc.setText(id);
-                 //Displaypage.disc.setText("hey " + id);
                 //onStart();
 
                 // Code For selecting music
-                //loc.setText(location_data[0] + "," + location_data[1]);
-                //System.out.println(location_data);
-               // JSONObject o = new JSONObject(https://api.openweathermap.org/data/2.5/weather?lat=43.054304&lon=-77.606241&APPID=c2669574602fa7abeb8a87e07656a42b)
+
 
 
             }
@@ -182,6 +181,8 @@ public class MainActivity extends AppCompatActivity {
                     final Track track = playerState.track;
                     if (track != null) {
                         Log.d("MainActivity", track.name + " by " + track.artist.name);
+                        song.setText(track.name + " by " + track.artist.name);
+
                     }
                 });
 }
