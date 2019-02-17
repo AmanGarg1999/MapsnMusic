@@ -13,6 +13,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.HashMap;
 
 public class fetchdata extends AsyncTask<Void,Void,Void> {
     String data;
@@ -21,8 +22,9 @@ public class fetchdata extends AsyncTask<Void,Void,Void> {
     String temperature;
     String music;
     String mood;
+    public String idnum;
     @Override
-    protected Void doInBackground(Void... voids) {
+    public Void doInBackground(Void... voids) {
         try {
             URL url = new URL("https://api.openweathermap.org/data/2.5/weather?lat=43.054304&lon=-77.606241&APPID=c2669574602fa7abeb8a87e07656a42b");
 
@@ -40,8 +42,10 @@ public class fetchdata extends AsyncTask<Void,Void,Void> {
             String[] info;
 
             info=data.split(":");
-            String[] s=info[11].split(",");
-            temperature=s[0];
+            String[] tempr=info[11].split(",");
+            temperature=tempr[0];
+            String[] id = info[5].split(",");
+            this.idnum = id[0];
             //ystem.out.println(temperature);
 
             double high = 283.15;
@@ -55,7 +59,7 @@ public class fetchdata extends AsyncTask<Void,Void,Void> {
 //                        System.out.println("High Traffic - Playing High Traffic Music");
 //                    }
 //                    else{
-                         double temp = Double.parseDouble(temperature);
+                        double temp = Double.parseDouble(temperature);
                         if(temp>high){
                             music = "High Temperature - Playing High Temperature Music";
                             mood = "high";
@@ -80,12 +84,23 @@ public class fetchdata extends AsyncTask<Void,Void,Void> {
     }
 
     @Override
-    protected void onPostExecute(Void aVoid) {
+    public void onPostExecute(Void aVoid) {
         super.onPostExecute(aVoid);
 
-        MainActivity.loc.setText(this.music);
+        //MainActivity.loc.setText(this.idnum);
         MainActivity.mood = this.mood;
+        HashMap<Integer, String> dictionary = new HashMap<>();
+        idtoConditions itc = new idtoConditions();
+        itc.loadDictionary(dictionary);
+        String condition = itc.getWeather(Integer.parseInt(idnum),dictionary);
+
+        Displaypage.disc.setText("It's " + condition);
+
     }
+//    public String getID()
+//    {
+//        return this.idnum;
+//    }
 
 
 }

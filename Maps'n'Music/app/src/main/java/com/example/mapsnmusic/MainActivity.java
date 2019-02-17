@@ -1,6 +1,7 @@
 package com.example.mapsnmusic;
 import android.Manifest;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
@@ -31,14 +32,20 @@ public class MainActivity extends AppCompatActivity {
 
     public Button playbt;
     //private GoogleMap map;
-    public static TextView loc;
+    //public static TextView loc;
     public String[] location_data;
     public static String mood;
-    public String[] high = {"spotify:playlist:37i9dQZF1DXdPec7aLTmlC"};
-    public String[] med = {"spotify:playlist:37i9dQZF1DWSRc3WJklgBs"};
-    public String[] low = {"spotify:playlist:37i9dQZF1DWSqmBTGDYngZ"};
+//    public String[] high = {"spotify:playlist:37i9dQZF1DXdPec7aLTmlC"};
+//    public String[] med = {"spotify:playlist:37i9dQZF1DWSRc3WJklgBs"};
+//    public String[] low = {"spotify:playlist:37i9dQZF1DWSqmBTGDYngZ"};
 
-    //    StringBuilder str=new StringBuilder();      tfhnfnh
+    public String[] high ={"spotify:playlist:37i9dQZF1DWWMOmoXKqHTD","spotify:playlist:37i9dQZF1DX3rxVfibe1L0","spotify:playlist:37i9dQZF1DX4fpCWaHOned","spotify:playlist:37i9dQZF1DX6ziVCJnEm59"};
+
+    public String[] med={"spotify:playlist:37i9dQZF1DXdPec7aLTmlC","spotify:playlist:37i9dQZF1DX7gIoKXt0gmx","spotify:playlist:37i9dQZF1DX0UrRvztWcAU","spotify:playlist:37i9dQZF1DWXmlLSKkfdAk","37i9dQZF1DWSRc3WJklgBs"};
+
+    public String[] low={"spotify:playlist:37i9dQZF1DWSqmBTGDYngZ","spotify:playlist:37i9dQZF1DX7KNKjOK0o75","spotify:playlist:37i9dQZF1DX3YSRoSdA634"};
+
+    //    StringBuilder str=new StringBuilder();
     //    URL url;
     //    String inputLine;
 
@@ -49,14 +56,19 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         playbt = (Button) findViewById(R.id.playbtn); // Create Play Button
-        loc = (TextView)findViewById(R.id.location);
+       // loc = (TextView)findViewById(R.id.location);
 
         playbt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 fetchdata background = new fetchdata();
                 background.execute();
-                onStart();
+                //String id = background.getID();
+                connected();
+                startActivity(new Intent(MainActivity.this, Displaypage.class));
+                //loc.setText(id);
+                 //Displaypage.disc.setText("hey " + id);
+                //onStart();
 //                try {
 //                    //StringBuffer response = new StringBuffer();
 //                    URL oracle = new URL("https://api.openweathermap.org/data/2.5/weather?lat=43.054304&lon=-77.606241&APPID=c2669574602fa7abeb8a87e07656a42b");
@@ -147,7 +159,7 @@ public class MainActivity extends AppCompatActivity {
                         Log.d("MainActivity", "Connected! Yay!");
 
                         // Now you can start interacting with App Remote
-                        connected();
+                        //connected();
                     }
 
                     @Override
