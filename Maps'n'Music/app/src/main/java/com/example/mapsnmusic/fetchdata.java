@@ -91,7 +91,7 @@ public class fetchdata extends AsyncTask<Void,Void,Void> {
         int firstnum = first%10;
 
         MainActivity.cond.setText("It's " + condition);
-        MainActivity.temp.setText(this.temperature);
+        MainActivity.temp.setText(this.temperature+ "K");
 
     }
 
